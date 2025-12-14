@@ -41,7 +41,7 @@ cp archetypes/puzzle-game.md your-project/
 │   └── ...
 │
 ├── examples/             # Working example apps
-│   └── upwords/         # Word chain puzzle game
+│   └── upwords/         # UpWord - word chain puzzle game
 │
 └── .vscode/
     └── mcp.json         # MCP config for VS Code AI tools
@@ -72,7 +72,7 @@ Working apps built using these instructions:
 
 | App | Description | Instructions Used |
 |-----|-------------|-------------------|
-| [Upwords](examples/upwords/) | Word chain puzzle game | `nuxt-ui-v4.md` + `puzzle-game.md` |
+| [UpWord](examples/upwords/) | Word chain puzzle game | `nuxt-ui-v4.md` + `puzzle-game.md` |
 
 ## Philosophy
 

@@ -1,8 +1,8 @@
-# Upwords
+# UpWord
 
 A word chain puzzle game built with Nuxt 4 + Nuxt UI v4.
 
-![Upwords Screenshot](screenshot.png)
+![UpWord Screenshot](screenshot.png)
 
 ## The Game
 
