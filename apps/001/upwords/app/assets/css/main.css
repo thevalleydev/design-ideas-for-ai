@@ -1,0 +1,165 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* ========================================
+   THEME BACKGROUNDS
+   ======================================== */
+
+/* Light mode background */
+html, body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+/* Dark mode background */
+.dark html, .dark body,
+html.dark, body.dark,
+:root.dark {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+/* ========================================
+   PREVENT INTERACTIONS
+   ======================================== */
+
+.game-container {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+.word-display {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-stat {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* ========================================
+   REUSED LETTER STYLING
+   ======================================== */
+
+/* Light mode - purple with subtle glow */
+.reused-letter {
+  color: #7c3aed;
+  text-shadow: 0 0 8px rgba(124, 58, 237, 0.4);
+  position: relative;
+}
+
+.reused-letter::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #ec4899);
+  border-radius: 2px;
+}
+
+/* Dark mode - cyan with stronger glow */
+.dark .reused-letter {
+  color: #22d3ee;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+}
+
+.dark .reused-letter::after {
+  background: linear-gradient(90deg, #22d3ee, #a855f7);
+}
+
+/* ========================================
+   GLASSMORPHISM
+   ======================================== */
+
+/* Light mode glass */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark mode glass */
+.dark .glass {
+  background: rgba(30, 30, 50, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass-subtle {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Safe area for iPhone notch */
+.pb-safe {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes pulse-warning {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.animate-pulse-warning {
+  animation: pulse-warning 0.8s ease-in-out infinite;
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.4s ease-out;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
+  50% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.7); }
+}
+
+.animate-glow {
+  animation: glow-pulse 1.5s ease-in-out infinite;
+}
