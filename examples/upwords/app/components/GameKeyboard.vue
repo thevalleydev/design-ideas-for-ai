@@ -1,13 +1,23 @@
 <template>
-  <div class="fixed bottom-0 left-0 right-0 glass border-t border-gray-200 dark:border-white/20 pt-3 pb-safe z-50 shadow-2xl">
-    <div class="max-w-lg mx-auto px-2">
-      <!-- Letter rows -->
+  <div class="fixed bottom-0 left-0 right-0 bg-gray-200 dark:bg-zinc-800 pt-2 pb-safe z-50">
+    <div class="max-w-lg mx-auto px-1.5">
+      <!-- Letter rows - Wordle style -->
       <div 
         v-for="(row, rowIndex) in keyboardRows" 
         :key="rowIndex" 
         class="flex justify-center gap-1.5 mb-1.5"
-        :class="{ 'px-3': rowIndex === 1, 'px-6': rowIndex === 2 }"
       >
+        <!-- Enter key on left of bottom row -->
+        <button
+          v-if="rowIndex === 2"
+          @click="handleSubmit"
+          class="keyboard-key keyboard-key-wide"
+          :class="submitClass"
+          :disabled="!canSubmit"
+        >
+          ENTER
+        </button>
+        
         <button
           v-for="key in row"
           :key="key"
@@ -17,31 +27,20 @@
         >
           {{ key }}
         </button>
-      </div>
-      
-      <!-- Bottom row: special keys -->
-      <div class="flex gap-2 px-2 mt-3">
+        
+        <!-- Backspace on right of bottom row -->
         <button 
+          v-if="rowIndex === 2"
           @click="$emit('backspace')"
-          class="keyboard-key flex-1 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/15 dark:hover:bg-white/25 dark:active:bg-white/30"
+          class="keyboard-key keyboard-key-wide bg-gray-300 dark:bg-zinc-600"
         >
           <UIcon name="i-lucide-delete" class="w-6 h-6 text-gray-700 dark:text-white" />
-        </button>
-        
-        <button 
-          @click="handleSubmit"
-          class="keyboard-key flex-[3] font-bold text-lg transition-all duration-200"
-          :class="submitClass"
-          :disabled="!canSubmit"
-        >
-          <UIcon v-if="canSubmit" name="i-lucide-check" class="w-5 h-5 mr-1" />
-          SUBMIT
         </button>
       </div>
       
       <!-- Desktop hint -->
-      <p class="hidden lg:block text-center text-gray-400 dark:text-white/40 text-xs mt-3 pb-1">
-        💡 Tip: Use your keyboard to type
+      <p class="hidden lg:block text-center text-gray-400 dark:text-white/40 text-xs mt-2 pb-1">
+        💡 Use your keyboard to type
       </p>
     </div>
   </div>
@@ -78,41 +77,46 @@ function handleSubmit() {
 function getKeyClass(key: string) {
   const isHighlighted = props.highlightedLetters?.includes(key)
   if (isHighlighted) {
-    return 'bg-purple-100 text-purple-700 ring-2 ring-purple-300 dark:bg-cyan-500/30 dark:text-cyan-300 dark:ring-cyan-400/50'
+    return 'bg-emerald-500 text-white dark:bg-emerald-600'
   }
-  return 'bg-white text-gray-800 hover:bg-gray-50 dark:bg-white/15 dark:text-white dark:hover:bg-white/25'
+  return 'bg-gray-300 text-gray-800 dark:bg-zinc-600 dark:text-white'
 }
 
 const submitClass = computed(() => {
   if (props.canSubmit) {
-    return 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-cyan-400/40 active:scale-95'
+    return 'bg-emerald-500 text-white dark:bg-emerald-600'
   }
-  return 'bg-gray-200 text-gray-400 dark:bg-white/10 dark:text-white/30 cursor-not-allowed'
+  return 'bg-gray-300 text-gray-500 dark:bg-zinc-600 dark:text-zinc-400 cursor-not-allowed'
 })
 </script>
 
 <style scoped>
 .keyboard-key {
-  height: 52px;
-  min-width: 30px;
+  height: 58px;
+  min-width: 32px;
   flex: 1;
-  padding: 0 2px;
-  border-radius: 12px;
+  border-radius: 4px;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s ease;
+  text-transform: uppercase;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.05);
+  cursor: pointer;
+  user-select: none;
 }
 
 .keyboard-key:active:not(:disabled) {
-  transform: scale(0.92);
+  opacity: 0.7;
 }
 
 .keyboard-key:disabled {
   cursor: not-allowed;
+}
+
+.keyboard-key-wide {
+  flex: 1.5;
+  font-size: 12px;
 }
 </style>
