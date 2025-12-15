@@ -23,7 +23,7 @@
           </div>
           <div v-else key="logo" class="flex flex-col items-center">
             <span class="font-black text-xl tracking-widest bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 dark:from-cyan-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-              UPWORD
+              UpWord
             </span>
             <span class="text-xs text-gray-500 dark:text-gray-400 -mt-1">Word Chain</span>
           </div>
